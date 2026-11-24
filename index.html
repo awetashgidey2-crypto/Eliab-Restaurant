@@ -1,1 +1,283 @@
 
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Eliab Restaurant</title>
+<meta name="theme-color" content="#16120e">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#16120e;--card:#211a14;--card2:#2a2119;--line:#3a2e22;--gold:#e0a54a;--gold2:#f3c97a;--red:#c8452b;--ink:#f6ede0;--mute:#b5a692;--ok:#5bbf7a}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:Inter,'Noto Sans Ethiopic',system-ui,sans-serif;font-size:15px;line-height:1.5;padding-bottom:84px}
+h1,h2,h3{font-family:'Playfair Display','Noto Sans Ethiopic',serif;line-height:1.2}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:20;background:rgba(22,18,14,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) 0 10px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:var(--gold2)}
+.mono{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--red));display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:#16120e}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 13px;font-weight:600;font-size:13px;cursor:pointer}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(22,18,14,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs div{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav.tabs a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;color:var(--mute);text-decoration:none;font-size:11px;font-weight:600;position:relative}
+nav.tabs a span{font-size:20px}
+nav.tabs a.on{color:var(--gold2)}
+.badge{position:absolute;top:2px;right:22%;background:var(--red);color:#fff;border-radius:999px;font-size:10px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px}
+.hero{margin:16px 0;border-radius:24px;padding:28px 22px;background:radial-gradient(120% 120% at 100% 0,#6b2c1a 0,transparent 55%),linear-gradient(160deg,#2b2016,#16120e);border:1px solid var(--line);position:relative;overflow:hidden}
+.hero small{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-weight:700;font-size:11px}
+.hero h1{font-size:32px;margin:8px 0 8px}
+.hero p{color:var(--mute);max-width:34ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px 20px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--gold),#d4812f);color:#1a120a;text-decoration:none}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.block{width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.quick a{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 6px;text-align:center;text-decoration:none;color:var(--ink);font-weight:600;font-size:13px}
+.quick a span{display:block;font-size:26px;margin-bottom:4px}
+.sec{margin:26px 0 12px;display:flex;justify-content:space-between;align-items:end}
+.sec h2{font-size:22px}
+.sec a{color:var(--gold);text-decoration:none;font-size:13px;font-weight:600}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 15px;font-weight:600;font-size:13px;cursor:pointer;color:var(--mute)}
+.chip.on{background:var(--gold);color:#1a120a;border-color:var(--gold)}
+.grid{display:grid;gap:12px}
+.dish{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px}
+.dish .pic{flex:0 0 84px;height:84px;border-radius:14px;display:grid;place-items:center;font-size:40px;background:linear-gradient(135deg,#3b2b1c,#5a3420);overflow:hidden}
+.dish .pic img{width:100%;height:100%;object-fit:cover}
+.dish .bd{flex:1;min-width:0;display:flex;flex-direction:column}
+.dish h3{font-size:16px;font-family:Inter,'Noto Sans Ethiopic',sans-serif;font-weight:700}
+.dish p{color:var(--mute);font-size:12.5px;flex:1}
+.dish .pr{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.dish b{color:var(--gold2)}
+.add{border:0;border-radius:10px;background:var(--gold);color:#1a120a;font-weight:700;padding:7px 13px;cursor:pointer}
+.tag{font-size:10px;background:var(--red);color:#fff;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:0}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+label{display:block;font-size:12px;font-weight:700;color:var(--mute);margin:14px 0 6px;letter-spacing:.04em}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card2);cursor:pointer;font-weight:700}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.tot{display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding-top:12px}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.room{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.room .ph{height:110px;background:linear-gradient(135deg,#43301f,#7a3a1f);display:grid;place-items:center;font-size:48px}
+.room .bd{padding:14px}
+.acc{border:1px solid var(--line);border-radius:16px;background:var(--card);margin:10px 0;overflow:hidden}
+.acc summary{padding:15px 16px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.acc summary::after{content:'＋';color:var(--gold)}
+.acc[open] summary::after{content:'－'}
+.acc div{padding:0 16px 16px;color:var(--mute);font-size:14px}
+.acc div p{margin-top:8px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--gold);color:#1a120a;font-weight:700;border-radius:12px;padding:10px 18px;z-index:50;opacity:0;pointer-events:none;transition:.25s}
+.toast.show{opacity:1}
+.auth{min-height:100vh;display:flex;align-items:center;padding:24px 16px;background:radial-gradient(100% 60% at 50% 0,#4a2316 0,transparent 70%),var(--bg)}
+.auth .box{width:100%;max-width:420px;margin:auto}
+.auth .mono{width:64px;height:64px;font-size:36px;border-radius:20px;margin:0 auto 14px}
+.tabsw{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin:18px 0 4px}
+.tabsw button{border:0;background:none;border-radius:10px;padding:10px;font-weight:700;color:var(--mute);cursor:pointer}
+.tabsw button.on{background:var(--gold);color:#1a120a}
+.err{color:#ff8d7a;font-size:13px;margin-top:10px;min-height:18px}
+.info li{list-style:none;padding:9px 0;border-bottom:1px dashed var(--line);display:flex;gap:10px}
+.mute{color:var(--mute)}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ======= EDIT HERE (ቀላል ቅንብር) ======= */
+const CFG={
+  name:'Eliab Restaurant', nameAm:'ኤልያብ ሬስቶራንት',
+  phone:'+251900000000',            // ስልክ ቁጥር (ለምሳሌ +251911223344)
+  tg:'',                            // Telegram username ያለ @ (ለምሳሌ eliab_rest)
+  addr:'CMC ሚካኤል ቤተክርስቲያን አካባቢ፣ አዲስ አበባ', addrEn:'Near CMC Michael Church, Addis Ababa',
+  hours:'ሁልጊዜ 7:00 ጠዋት – 10:00 ማታ', hoursEn:'Daily 7:00 AM – 10:00 PM',
+  currency:'ETB', delivery:true, hotel:true
+};
+const MENU=[
+ {id:'m1',c:'ethiopian',e:'🍗',n:'Doro Wat',a:'ዶሮ ወጥ',d:'ዶሮ ወጥ ከእንቁላል እና ከኢንጀራ ጋር',p:420,hot:1},
+ {id:'m2',c:'ethiopian',e:'🥩',n:'Special Tibs',a:'ስፔሻል ጥብስ',d:'የበሬ ጥብስ በሽንኩርት እና በቅመም',p:380,hot:1},
+ {id:'m3',c:'ethiopian',e:'🔥',n:'Kitfo',a:'ክትፎ',d:'ክትፎ ከአይብ እና ከጎመን ጋር',p:450},
+ {id:'m4',c:'ethiopian',e:'🫓',n:'Shiro',a:'ሽሮ',d:'የጾም ሽሮ ከኢንጀራ ጋር',p:180},
+ {id:'m5',c:'ethiopian',e:'🍲',n:'Firfir',a:'ፍርፍር',d:'ልዩ የቤት ፍርፍር',p:220},
+ {id:'m6',c:'ethiopian',e:'🍽️',n:'Eliab Special Platter',a:'ኤልያብ ስፔሻል',d:'ለ 2 ሰው የተደባለቀ ትልቅ ሳህን',p:950,hot:1},
+ {id:'m7',c:'western',e:'🍝',n:'Spaghetti Bolognese',a:'ስፓጌቲ',d:'ስፓጌቲ በስጋ መረቅ',p:260},
+ {id:'m8',c:'western',e:'🍔',n:'Beef Burger',a:'በርገር',d:'በርገር ከጥብስ ድንች ጋር',p:320},
+ {id:'m9',c:'western',e:'🍕',n:'Margherita Pizza',a:'ፒዛ',d:'ትኩስ ፒዛ በአይብ',p:380},
+ {id:'m10',c:'western',e:'🐟',n:'Fish Fillet',a:'የዓሳ ፊሌ',d:'የተጠበሰ ዓሳ ከአትክልት ጋር',p:340},
+ {id:'m11',c:'breakfast',e:'🍳',n:'Eggs Special',a:'እንቁላል ስፔሻል',d:'እንቁላል ፍርፍር ከዳቦ ጋር',p:140},
+ {id:'m12',c:'breakfast',e:'🥞',n:'Pancake',a:'ፓንኬክ',d:'ፓንኬክ ከማር ጋር',p:150},
+ {id:'m13',c:'drinks',e:'☕',n:'Ethiopian Coffee',a:'ቡና',d:'የባህል ቡና ከፈንዲሻ ጋር',p:40,hot:1},
+ {id:'m14',c:'drinks',e:'🥛',n:'Macchiato',a:'ማኪያቶ',d:'ትኩስ ማኪያቶ',p:50},
+ {id:'m15',c:'drinks',e:'🍹',n:'Fresh Juice',a:'ፍሬሽ ጁስ',d:'አቮካዶ፣ ማንጎ ወይም ፓፓያ',p:90},
+ {id:'m16',c:'drinks',e:'🫖',n:'Tea',a:'ሻይ',d:'ትኩስ ሻይ በቅመም',p:30},
+ {id:'m17',c:'drinks',e:'🥤',n:'Soft Drink',a:'ለስላሳ መጠጥ',d:'ኮካ፣ ስፕራይት ወይም ፋንታ',p:45}
+];
+const CATS=[['all','ሁሉም','All'],['ethiopian','የኢትዮጵያ','Ethiopian'],['western','ምዕራባዊ','Western'],['breakfast','ቁርስ','Breakfast'],['drinks','መጠጦች','Drinks']];
+const ROOMS=[
+ {e:'🛏️',n:'Standard Room',a:'ስታንዳርድ ክፍል',d:'አንድ አልጋ፣ ሻወር፣ ዋይፋይ',p:1500},
+ {e:'🛌',n:'Double Room',a:'ባለ ሁለት አልጋ',d:'ሁለት አልጋ፣ ቲቪ፣ ሻወር፣ ዋይፋይ',p:2200},
+ {e:'👑',n:'Executive Suite',a:'ኤክስኪዩቲቭ ስዊት',d:'ሰፊ ክፍል፣ ሳሎን፣ ቁርስ ጨምሮ',p:3800}
+];
+const T={
+ am:{home:'መነሻ',menu:'ሜኑ',order:'ትዕዛዝ',reserve:'ማስያዝ',more:'ተጨማሪ',welcome:'እንኳን ደህና መጡ',hero:'ጣፋጭ ምግብ፣ ሞቅ ያለ አቀባበል',heroP:'የኢትዮጵያ እና የዓለም ምግቦችን ከቤትዎ ወይም እዚሁ ሆነው ይዘዝ።',seeMenu:'ሜኑ ይመልከቱ',call:'ይደውሉ',popular:'ተወዳጅ ምግቦች',all:'ሁሉንም',search:'ምግብ ይፈልጉ…',add:'ጨምር',added:'ወደ ትዕዛዝ ተጨመረ ✓',yourOrder:'ትዕዛዝዎ',empty:'ምንም አልተመረጠም። ከሜኑ ይምረጡ።',total:'ጠቅላላ',name:'ስም',phone:'ስልክ',type:'የትዕዛዝ አይነት',dinein:'እዚሁ እበላለሁ',takeaway:'ይዤ እሄዳለሁ',deliv:'ወደ ቤት ይላክ',addr:'አድራሻ / የጠረጴዛ ቁጥር',note:'ማስታወሻ (አማራጭ)',send:'ትዕዛዝ ላክ',date:'ቀን',time:'ሰዓት',guests:'የሰው ብዛት',resBtn:'ቦታ ያዝ',rooms:'ክፍሎች',perNight:'በአንድ ሌሊት',bookRoom:'ክፍል ይጠይቁ',about:'ስለ እኛ',contact:'አግኙን',hours:'የስራ ሰዓት',policies:'ደንቦች እና ፖሊሲ',logout:'ውጣ',account:'መለያ',login:'ግባ',register:'መለያ ክፈት',email:'ኢሜይል',pass:'የይለፍ ቃል',fname:'ሙሉ ስም',loginErr:'ኢሜይል ወይም የይለፍ ቃል ትክክል አይደለም',regErr:'ሁሉንም ይሙሉ (የይለፍ ቃል ቢያንስ 6 ፊደል)',exists:'ይህ ኢሜይል ቀድሞ ተመዝግቧል',fillAll:'እባክዎ ሁሉንም ይሙሉ',copied:'መልእክቱ ተቀድቷል፣ በ Telegram ይላኩ',lang:'English',noRes:'ምንም አልተገኘም',hot:'ተወዳጅ',cur:'ብር'},
+ en:{home:'Home',menu:'Menu',order:'Order',reserve:'Reserve',more:'More',welcome:'Welcome',hero:'Great food, warm welcome',heroP:'Order Ethiopian and international dishes — dine in, take away or delivery.',seeMenu:'View menu',call:'Call us',popular:'Popular dishes',all:'See all',search:'Search dishes…',add:'Add',added:'Added to order ✓',yourOrder:'Your order',empty:'Nothing yet. Pick dishes from the menu.',total:'Total',name:'Name',phone:'Phone',type:'Order type',dinein:'Dine in',takeaway:'Take away',deliv:'Delivery',addr:'Address / table number',note:'Note (optional)',send:'Send order',date:'Date',time:'Time',guests:'Guests',resBtn:'Reserve table',rooms:'Rooms',perNight:'per night',bookRoom:'Ask for room',about:'About us',contact:'Contact',hours:'Opening hours',policies:'Policies',logout:'Log out',account:'Account',login:'Log in',register:'Create account',email:'Email',pass:'Password',fname:'Full name',loginErr:'Wrong email or password',regErr:'Fill everything (password min 6 chars)',exists:'This email is already registered',fillAll:'Please fill all fields',copied:'Message copied — paste it in Telegram',lang:'አማርኛ',noRes:'Nothing found',hot:'Popular',cur:'ETB'}
+};
+const POL=[
+ ['Privacy Policy · የግላዊነት ፖሊሲ',['የሚሰበሰበው ስም፣ ኢሜይል እና ስልክ ትዕዛዝዎን ለማስተናገድ ብቻ ነው።','መረጃዎን ለሶስተኛ ወገን አንሸጥም አናካፍልም።','መለያዎን ለመሰረዝ ከፈለጉ ያነጋግሩን።','We only use your name, email and phone to handle your orders and reservations. We never sell your data.']],
+ ['Terms & Conditions · ውሎች',['ትዕዛዝ ከተረጋገጠ በኋላ ዋጋ እና ተገኝነት ሊለያይ ይችላል፤ እናሳውቅዎታለን።','የሜኑ ዋጋዎች በኢትዮጵያ ብር (ETB) ናቸው።','Prices are in ETB and may change. Availability is confirmed when we contact you.']],
+ ['Cancellation & Refund · ስረዛ',['ትዕዛዝ ምግብ ዝግጅት ከመጀመሩ በፊት መሰረዝ ይቻላል።','ቦታ ማስያዝ ከ 2 ሰዓት በፊት በስልክ ሊሰረዝ ይችላል።','Orders can be cancelled before preparation starts. Reservations can be cancelled by phone at least 2 hours ahead.']],
+ ['Allergy & Food Safety · የምግብ ደህንነት',['አለርጂ ካለብዎ ትዕዛዝ ሲሰጡ ማስታወሻ ላይ ይጻፉ።','ምግባችን በንጽህና ይዘጋጃል።','Tell us about any allergy in the order note. Food is prepared fresh and hygienically.']],
+ ['Delivery · ማድረስ',['ማድረስ በአቅራቢያ ባሉ አካባቢዎች ይገኛል፤ ክፍያ በጥሬ ገንዘብ ሲደርስ ነው።','Delivery is available nearby. Payment is cash on delivery.']]
+];
+/* ======= helpers ======= */
+const $=s=>document.querySelector(s);
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let lang=ls.get('el_lang','am'),user=ls.get('el_user',null),cart=ls.get('el_cart',{}),cat='all',q='',authMode='login';
+const t=k=>T[lang][k]||k;
+const money=n=>Number(n).toLocaleString('en-US')+' '+t('cur');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nm=o=>lang==='am'?o.a:o.n;
+function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),1800)}
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('eliab:'+s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=5381;for(const c of 'eliab:'+s)h=((h<<5)+h+c.charCodeAt(0))|0;return 'x'+h}}
+const cartCount=()=>Object.values(cart).reduce((a,b)=>a+b,0);
+const cartTotal=()=>Object.entries(cart).reduce((s,[id,n])=>s+(MENU.find(m=>m.id===id)?.p||0)*n,0);
+function saveCart(){ls.set('el_cart',cart)}
+function sendMsg(text){
+  if(CFG.tg){window.open('https://t.me/'+CFG.tg+'?text='+encodeURIComponent(text),'_blank');return}
+  try{navigator.clipboard.writeText(text).catch(function(){})}catch(e){}
+  toast(t('copied'));
+}
+/* ======= auth ======= */
+function renderAuth(){
+  $('#root').innerHTML=`<div class="auth"><div class="box center">
+  <div class="mono">E</div><h1 style="color:var(--gold2)">${esc(lang==='am'?CFG.nameAm:CFG.name)}</h1>
+  <p class="mute" style="margin-top:6px">${t('welcome')}</p>
+  <div class="tabsw"><button class="${authMode==='login'?'on':''}" data-m="login">${t('login')}</button><button class="${authMode==='register'?'on':''}" data-m="register">${t('register')}</button></div>
+  <form id="af" style="text-align:left">
+   ${authMode==='register'?`<label>${t('fname')}</label><input name="name" autocomplete="name">`:''}
+   <label>${t('email')}</label><input name="email" type="email" autocomplete="email" required>
+   <label>${t('pass')}</label><input name="pass" type="password" autocomplete="${authMode==='login'?'current-password':'new-password'}" required>
+   <div class="err" id="aerr"></div>
+   <button class="btn block" style="margin-top:8px">${authMode==='login'?t('login'):t('register')}</button>
+  </form>
+  <button class="pill" id="lg" style="margin-top:18px">${t('lang')}</button>
+  </div></div>`;
+  document.querySelectorAll('.tabsw button').forEach(b=>b.onclick=()=>{authMode=b.dataset.m;renderAuth()});
+  $('#lg').onclick=()=>{lang=lang==='am'?'en':'am';ls.set('el_lang',lang);renderAuth()};
+  $('#af').onsubmit=async e=>{
+    e.preventDefault();const f=new FormData(e.target),email=(f.get('email')||'').trim().toLowerCase(),pass=f.get('pass')||'',name=(f.get('name')||'').trim();
+    const users=ls.get('el_users',{});const h=await hash(pass);
+    if(authMode==='register'){
+      if(!name||!email||pass.length<6){$('#aerr').textContent=t('regErr');return}
+      if(users[email]){$('#aerr').textContent=t('exists');return}
+      users[email]={name,h};ls.set('el_users',users);user={email,name};
+    }else{
+      const u=users[email];if(!u||u.h!==h){$('#aerr').textContent=t('loginErr');return}
+      user={email,name:u.name};
+    }
+    ls.set('el_user',user);location.hash='#/home';render();
+  };
+}
+/* ======= views ======= */
+function dishCard(m){return `<div class="dish"><div class="pic">${m.img?`<img src="${esc(m.img)}" alt="" loading="lazy">`:m.e}</div><div class="bd"><h3>${esc(nm(m))}${m.hot?`<span class="tag">${t('hot')}</span>`:''}</h3><p>${esc(m.d)}</p><div class="pr"><b>${money(m.p)}</b><button class="add" data-add="${m.id}">＋ ${t('add')}</button></div></div></div>`}
+function bindAdd(){document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const id=b.dataset.add;cart[id]=(cart[id]||0)+1;saveCart();toast(t('added'));updBadge()})}
+function vHome(){
+  const pop=MENU.filter(m=>m.hot);
+  return `<div class="hero"><small>${t('welcome')}${user?', '+esc(user.name.split(' ')[0]):''}</small><h1>${t('hero')}</h1><p>${t('heroP')}</p><div class="row" style="margin-top:18px"><a class="btn" href="#/menu">🍽 ${t('seeMenu')}</a><a class="btn ghost" href="tel:${CFG.phone}">📞 ${t('call')}</a></div></div>
+  <div class="quick"><a href="#/menu"><span>🍛</span>${t('menu')}</a><a href="#/reserve"><span>📅</span>${t('reserve')}</a>${CFG.hotel?`<a href="#/rooms"><span>🛏️</span>${t('rooms')}</a>`:`<a href="#/info"><span>ℹ️</span>${t('about')}</a>`}</div>
+  <div class="sec"><h2>${t('popular')}</h2><a href="#/menu">${t('all')} →</a></div><div class="grid">${pop.map(dishCard).join('')}</div>
+  <div class="panel"><b>🕒 ${t('hours')}</b><p class="mute">${lang==='am'?CFG.hours:CFG.hoursEn}</p><p style="margin-top:8px"><b>📍</b> <span class="mute">${lang==='am'?CFG.addr:CFG.addrEn}</span></p></div>`;
+}
+function vMenu(){
+  const list=MENU.filter(m=>(cat==='all'||m.c===cat)&&(!q||(m.n+m.a+m.d).toLowerCase().includes(q.toLowerCase())));
+  return `<div class="sec"><h2>${t('menu')}</h2></div><input id="sq" placeholder="${t('search')}" value="${esc(q)}">
+  <div class="chips" style="margin-top:10px">${CATS.map(c=>`<button class="chip ${cat===c[0]?'on':''}" data-c="${c[0]}">${lang==='am'?c[1]:c[2]}</button>`).join('')}</div>
+  <div class="grid" id="ml">${list.length?list.map(dishCard).join(''):`<div class="empty">${t('noRes')}</div>`}</div>`;
+}
+function vOrder(){
+  const items=Object.entries(cart).filter(([id,n])=>n>0&&MENU.find(m=>m.id===id));
+  if(!items.length)return `<div class="sec"><h2>${t('yourOrder')}</h2></div><div class="empty">🛒<br>${t('empty')}<br><br><a class="btn" href="#/menu">${t('seeMenu')}</a></div>`;
+  return `<div class="sec"><h2>${t('yourOrder')}</h2></div><div class="panel">${items.map(([id,n])=>{const m=MENU.find(x=>x.id===id);return `<div class="line"><div style="min-width:0"><b>${m.e} ${esc(nm(m))}</b><div class="mute" style="font-size:12px">${money(m.p)}</div></div><div class="qty"><button data-d="${id}">−</button><b>${n}</b><button data-u="${id}">＋</button></div></div>`}).join('')}<div class="tot"><span>${t('total')}</span><span style="color:var(--gold2)">${money(cartTotal())}</span></div></div>
+  <div class="panel"><label>${t('name')}</label><input id="on" value="${esc(user?.name||'')}"><label>${t('phone')}</label><input id="op" type="tel" value="${esc(ls.get('el_phone',''))}" placeholder="09…">
+  <label>${t('type')}</label><select id="ot"><option value="dinein">${t('dinein')}</option><option value="takeaway">${t('takeaway')}</option>${CFG.delivery?`<option value="delivery">${t('deliv')}</option>`:''}</select>
+  <label>${t('addr')}</label><input id="oa"><label>${t('note')}</label><textarea id="onote" rows="2"></textarea>
+  <button class="btn block" id="osend" style="margin-top:16px">✈️ ${t('send')}</button></div>`;
+}
+function vReserve(){
+  const d=new Date(Date.now()+864e5).toISOString().slice(0,10);
+  return `<div class="sec"><h2>${t('reserve')}</h2></div><div class="panel"><label>${t('name')}</label><input id="rn" value="${esc(user?.name||'')}"><label>${t('phone')}</label><input id="rp" type="tel" value="${esc(ls.get('el_phone',''))}" placeholder="09…">
+  <div class="row"><div style="flex:1;min-width:140px"><label>${t('date')}</label><input id="rd" type="date" value="${d}"></div><div style="flex:1;min-width:120px"><label>${t('time')}</label><input id="rt" type="time" value="19:00"></div></div>
+  <label>${t('guests')}</label><select id="rg">${[1,2,3,4,5,6,7,8,10,12,15,20].map(n=>`<option>${n}</option>`).join('')}</select>
+  <label>${t('note')}</label><textarea id="rnote" rows="2"></textarea><button class="btn block" id="rsend" style="margin-top:16px">📅 ${t('resBtn')}</button></div>`;
+}
+function vRooms(){
+  return `<div class="sec"><h2>${t('rooms')}</h2></div><div class="grid">${ROOMS.map((r,i)=>`<div class="room"><div class="ph">${r.e}</div><div class="bd"><h3>${esc(nm(r))}</h3><p class="mute">${esc(r.d)}</p><div class="pr" style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div><b style="color:var(--gold2);font-size:18px">${money(r.p)}</b><div class="mute" style="font-size:12px">${t('perNight')}</div></div><button class="add" data-room="${i}">${t('bookRoom')}</button></div></div></div>`).join('')}</div>`;
+}
+function vMore(){
+  return `<div class="sec"><h2>${t('more')}</h2></div>
+  <div class="panel"><b>👤 ${esc(user?.name||'')}</b><div class="mute">${esc(user?.email||'')}</div><div class="row" style="margin-top:12px"><button class="pill" id="lg2">🌐 ${t('lang')}</button><button class="pill" id="lo">⎋ ${t('logout')}</button></div></div>
+  <div class="panel info"><b>${t('contact')}</b><ul style="margin-top:6px"><li>📞 <a href="tel:${CFG.phone}" style="color:var(--gold2)">${esc(CFG.phone)}</a></li><li>📍 ${esc(lang==='am'?CFG.addr:CFG.addrEn)}</li><li>🕒 ${esc(lang==='am'?CFG.hours:CFG.hoursEn)}</li>${CFG.tg?`<li>✈️ <a href="https://t.me/${CFG.tg}" style="color:var(--gold2)">@${esc(CFG.tg)}</a></li>`:''}</ul></div>
+  <div class="panel"><b>${t('about')}</b><p class="mute" style="margin-top:6px">${lang==='am'?'ኤልያብ ሬስቶራንት ጣፋጭ የኢትዮጵያ እና የዓለም ምግቦችን በንጽህና እና በሞቅ ያለ አቀባበል ያቀርባል።':'Eliab Restaurant serves delicious Ethiopian and international dishes with a warm welcome.'}</p></div>
+  <div class="sec"><h2 style="font-size:19px">${t('policies')}</h2></div>${POL.map(p=>`<details class="acc"><summary>${p[0]}</summary><div>${p[1].map(x=>`<p>${x}</p>`).join('')}</div></details>`).join('')}
+  <p class="center mute" style="margin:24px 0;font-size:12px">© ${new Date().getFullYear()} ${esc(CFG.name)}</p>`;
+}
+function vInfo(){return vMore()}
+/* ======= router ======= */
+const ROUTES={home:vHome,menu:vMenu,order:vOrder,reserve:vReserve,rooms:vRooms,more:vMore,info:vInfo};
+function updBadge(){const b=$('#cb');if(!b)return;const n=cartCount();b.textContent=n;b.style.display=n?'grid':'none'}
+function render(){
+  if(!user){renderAuth();return}
+  const r=(location.hash.replace('#/','')||'home').split('?')[0];const key=ROUTES[r]?r:'home';
+  const tab=k=>`<a href="#/${k[0]}" class="${key===k[0]||(k[0]==='more'&&key==='info')||(k[0]==='home'&&key==='rooms')?'on':''}"><span>${k[1]}</span>${t(k[2])}${k[0]==='order'?'<i class="badge" id="cb"></i>':''}</a>`;
+  $('#root').innerHTML=`<header class="top"><div class="wrap"><div class="brand"><div class="mono">E</div>${esc(lang==='am'?CFG.nameAm:CFG.name)}</div><button class="pill" id="lg">${t('lang')}</button></div></header>
+  <main class="wrap">${ROUTES[key]()}</main><nav class="tabs"><div>${[['home','🏠','home'],['menu','🍛','menu'],['order','🛒','order'],['reserve','📅','reserve'],['more','☰','more']].map(tab).join('')}</div></nav>`;
+  $('#lg').onclick=()=>{lang=lang==='am'?'en':'am';ls.set('el_lang',lang);render()};
+  updBadge();bind(key);window.scrollTo(0,0);
+}
+function bind(key){
+  bindAdd();
+  if(key==='menu'){
+    document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{cat=c.dataset.c;render()});
+    $('#sq').oninput=e=>{q=e.target.value;const list=MENU.filter(m=>(cat==='all'||m.c===cat)&&(!q||(m.n+m.a+m.d).toLowerCase().includes(q.toLowerCase())));$('#ml').innerHTML=list.length?list.map(dishCard).join(''):`<div class="empty">${t('noRes')}</div>`;bindAdd()};
+  }
+  if(key==='order'&&$('#osend')){
+    document.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{cart[b.dataset.u]++;saveCart();render()});
+    document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{cart[b.dataset.d]--;if(cart[b.dataset.d]<=0)delete cart[b.dataset.d];saveCart();render()});
+    $('#osend').onclick=()=>{
+      const n=$('#on').value.trim(),p=$('#op').value.trim(),a=$('#oa').value.trim();
+      if(!n||!p){toast(t('fillAll'));return}
+      ls.set('el_phone',p);
+      const lines=Object.entries(cart).map(([id,c])=>{const m=MENU.find(x=>x.id===id);return `• ${m.n} x${c} = ${m.p*c} ETB`}).join('\n');
+      const ty=$('#ot').value;
+      sendMsg(`🍽 NEW ORDER — ${CFG.name}\n\n👤 ${n}\n📞 ${p}\n📦 ${ty}${a?'\n📍 '+a:''}\n${$('#onote').value?'📝 '+$('#onote').value+'\n':''}\n${lines}\n\n💰 TOTAL: ${cartTotal()} ETB`);
+      cart={};saveCart();setTimeout(render,400);
+    };
+  }
+  if(key==='reserve'){
+    $('#rsend').onclick=()=>{
+      const n=$('#rn').value.trim(),p=$('#rp').value.trim();if(!n||!p){toast(t('fillAll'));return}
+      ls.set('el_phone',p);
+      sendMsg(`📅 TABLE RESERVATION — ${CFG.name}\n\n👤 ${n}\n📞 ${p}\n🗓 ${$('#rd').value} ${$('#rt').value}\n👥 ${$('#rg').value} guests${$('#rnote').value?'\n📝 '+$('#rnote').value:''}`);
+    };
+  }
+  if(key==='rooms'){
+    document.querySelectorAll('[data-room]').forEach(b=>b.onclick=()=>{const r=ROOMS[b.dataset.room];sendMsg(`🛏 ROOM REQUEST — ${CFG.name}\n\n👤 ${user.name}\n✉️ ${user.email}\n🏨 ${r.n} (${r.p} ETB/night)`)});
+  }
+  if(key==='more'||key==='info'){
+    $('#lg2').onclick=()=>{lang=lang==='am'?'en':'am';ls.set('el_lang',lang);render()};
+    $('#lo').onclick=()=>{user=null;ls.set('el_user',null);render()};
+  }
+}
+addEventListener('hashchange',render);
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+render();
+</script>
+</body>
+</html>
